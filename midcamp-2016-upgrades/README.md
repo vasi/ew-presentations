@@ -19,7 +19,7 @@
 
 ## Outline
 
-* __About us__ [3m]
+* __About the speaker__ [3m]
 * __Intro__ [2m]
 * __Basics__: [10m]
   * Minor Updates (3m)
@@ -65,17 +65,19 @@
 
 <img src="http://evolvingweb.ca/sites/default/files/styles/large/public/_Q4A1828_0.jpg" width="25%" style="float: right; margin-left: 40px; margin-right: 20px" />
 
-* Public: Montreal, Ottawa, Toronto, DC Munich, NJ, NYC, Boston
+* Public: Montreal, Ottawa, Toronto, DC, Munich, NJ, NYC, Boston, Chicago
 * Private: Health Canada, Parks Canada, Tourism Quebec, Trent U, McGill U
 * Enterprise teams, dev shops, remote
 
 --end--
 
-## About the speakers
+## About the speaker
 
-* Alex co-founded Evolving Web straight out of undergrad
-* Dave was there to show us version control and Linux
-* Besides doing Drupal projects since 2008...
+* I've been at Evolving Web since 2008, taught my coworkers about version control
+* Work on lots of open source projects: Fink, Firefox, grub, pixz, etc
+* Been working with Drupal since D6
+* Currently interested in multilingual D8 migrations, want to make them great
+* EW is hiring! So let us know if you're interested
 
 --end--
 
@@ -87,7 +89,7 @@
 * Upgrades bring new features
   * Drupal 7 has many performance improving features over D6
   * Webform 4 brings token support
-* After Drupal 8 is released, Drupal 6 will become unsupported!
+* Drupal 6 is now EOL! No more security fixes
 
 --end--
 
