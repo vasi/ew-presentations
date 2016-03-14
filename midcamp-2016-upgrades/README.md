@@ -1,23 +1,16 @@
 <div style="position: absolute; height: 97%; width: 100%;">
-  <h2 style="margin:30px auto 50px 0px; font-size:1.8em; font-weight:bold; width: 90%; text-align: center">
-    Test Driven Drupal Upgrades
-  </h2>
-  <table style="width: 90%"><tr>
-    <td style="font-size:0.7em; text-align: center; width:50%;">
-      <div style="font-size:1.2em; font-weight:bold;">Alex Dergachev</div>
-      <div> alex@evolvingweb.ca </div>
-      <div> github.com/dergachev </div>
-      <div> twitter.com/dergachev </div>
-      <div> drupal.org/u/evolvingweb </div>
-    </td>
-    <td style="font-size:0.7em; text-align: center; width:50%;">
+  <div style="margin:30px auto 50px 0px; width: 90%; text-align: center">
+    <h2 style="font-size:1.8em; font-weight:bold;">
+      Test Driven Drupal Upgrades
+    </h2>
+    <div style="font-size:0.7em;">
       <div style="font-size:1.2em; font-weight:bold;">Dave Vasilevsky</div>
       <div> vasi@evolvingweb.ca </div>
       <div> github.com/vasi </div>
       <div> twitter.com/djvasi </div>
       <div> drupal.org/u/vasi </div>
-    </td>
-  </tr></table>
+    </div>
+  </div>
 
   <p><img src="img/ew-good.png" style="height:130px; margin: 10px 0 0 0; position: absolute; bottom: 0;"></p>
 </div>
