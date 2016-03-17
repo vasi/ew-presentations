@@ -247,20 +247,21 @@ For a more complex site, you might just want to do a full site rebuild.
 
 * Fast, good for standalone functions
 * Use fixtures for testing
+* Great for your custom modules, or core contributions
 * D7: SimpleTest (DrupalUnitTestCase)
-* D8: PHPUnit
-* Contrib module's unit tests won't help you much for updates
-* Good for custom modules
+* D8: PHPUnit (UnitTestCase)
+* But when you update a contrib module, your unit tests won't care at all. They're not super useful for testing updates
 
 --end--
 
 ## Integration testing
 
-* SimpleTest (DrupalWebTestCase)
+* Tests how your module integrates with other modules
+  * But only the modules that are necessary for your module to work, not the whole site
+* D7: SimpleTest (DrupalWebTestCase)
+* D8: PHPUnit (KernelTestBase)
 * Powerful Drupal integration: Enable modules, create content, add users...
-* By default, tests your module in isolation
-  * Or tight coupling, hard to maintain
-* Much slower, needs to site-install for each test
+* Can be really slow (esp. D7), may need to setup the DB for each test
 * Can't test things like JavaScript, CSS
 
 --end--
@@ -269,8 +270,11 @@ For a more complex site, you might just want to do a full site rebuild.
 
 * Tests your site by controlling a real browser
 * Very powerful and thorough
-* Eg: Selenium, CasperJS, behat
+* Not built-in to Drupal, need external tools
+  * Eg: Selenium, CasperJS, behat
+  * May be built-in in 8.2?
 * Great replacement for manual testing
+* Unlike above tests, there's no isolation. Your tests can change your site!
 
 --end--
 
