@@ -29,10 +29,10 @@
   * behat
   * CircleCI
   * docker
-    * __drupal-docker-marriage demo__
+      * __drupal-docker-marriage demo__
   * PHPUnit
   * sitediff
-    * __SiteDiff demo__
+      * __SiteDiff demo__
 
 --end--
 
@@ -51,6 +51,7 @@
   * Integration with legacy systems
   * Expert Drupal training
 * Based in Montreal, clients in Canada and USA
+* EW is hiring! So let us know if you're interested
 
 --end--
 
@@ -60,7 +61,7 @@
 
 ## Drupal training program
 
-<img src="http://evolvingweb.ca/sites/default/files/styles/large/public/_Q4A1828_0.jpg" width="25%" style="float: right; margin-left: 40px; margin-right: 20px" />
+<img src="https://evolvingweb.ca/sites/default/files/d7/_Q4A1828_0.jpg" width="25%" style="float: right; margin-left: 40px; margin-right: 20px" />
 
 * Public: Montreal, Ottawa, Toronto, DC, Munich, NJ, NYC, Boston, Chicago
 * Private: Health Canada, Parks Canada, Tourism Quebec, Trent U, McGill U
@@ -71,10 +72,8 @@
 ## About me
 
 * I've been at Evolving Web since 2008, taught my coworkers about version control
-* Work on lots of open source projects: Fink, Firefox, grub, pixz, etc
-* Been working with Drupal since D6
-* Currently interested in multilingual D8 migrations, want to make them great
-* EW is hiring! So let us know if you're interested
+  * Working with Drupal since D6
+* Participate in lots of open source projects: Fink, Firefox, grub, pixz, and of course Drupal core!
 
 --end--
 
