@@ -309,18 +309,6 @@ Here's how we implemented the "hover" rule above, in a custom behat context:
 
 --end--
 
-## behat stack
-
-<pre class="nocode" style="font-size: 30px;">
-Behat's Gherkin language
-Behat PHP contexts ---
-Mink                 | Drupal extension drivers
-Selenium
-Chrome
-</pre>
-
---end--
-
 ## CI
 
 * Tests can be slow
