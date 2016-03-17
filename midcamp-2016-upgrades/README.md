@@ -19,23 +19,20 @@
 
 ## Outline
 
-* __About the speaker__ [3m]
-* __Intro__ [2m]
-* __Basics__: [10m]
-  * Minor Updates (3m)
-  * Major Core Upgrades (4m)
-  * Testing (3m)
-* __Tools__: [6m]
-  * behat (3m)
-  * CircleCI (2m)
-  * docker	(1m)
-* __drupal-docker-marriage demo__ [8m]
-* __Case study__: McGill Courses and Programs D7 [18m]
-  * Description (7m)
-  * Solutions (4m)
-  * Docker (2m)
-  * SiteDiff (5m)
-* __SiteDiff demo__ [5m]
+* __About me__
+* __Intro__
+* __Basics__
+  * Minor Updates
+  * Major Core Upgrades
+  * Testing
+* __Tools__
+  * behat
+  * CircleCI
+  * docker
+    * __drupal-docker-marriage demo__
+  * PHPUnit
+  * sitediff
+    * __SiteDiff demo__
 
 --end--
 
@@ -71,7 +68,7 @@
 
 --end--
 
-## About the speaker
+## About me
 
 * I've been at Evolving Web since 2008, taught my coworkers about version control
 * Work on lots of open source projects: Fink, Firefox, grub, pixz, etc
@@ -116,7 +113,7 @@
 * Minor updates: 7.35 -> 7.36
   * Modules need updates too!
   * Perform these as often as possible, to keep up with security
-* Major upgrades: 6.28 -> 7.36
+* Major upgrades: 6.28 -> 8.0.5
   * Brings many, many new features and opportunities
   * Necessary before D6 is obsolute
 
@@ -166,43 +163,75 @@ The first rule of major upgrades is there is no such thing as a basic major upgr
 
 ## Major upgrade basics
 
-* Major upgrades can be harder than a site rebuild
-  * APIs can change in ways that aren't backwards-compatible
+* Major upgrades can be as hard as a site rebuild
+  * Change in ways that aren't backwards-compatible, especially D7 -> D8
   * Modules may not be updated yet, or at all
-* We are talking about D6 to D7
-  * Not clear whether it's possible to upgrade D7 to D8
-  * D8 might require use of migrate module instead of update hooks
 
 --end--
 
-## Major upgrade basics
+## Major upgrades, the old way
 
-Before you can start the upgrade (still in D6):
+You might still want to do D6 to D7 upgrades:
 
-* Update core and ALL contrib modules to latest d6 version
-* Defeaturize
-* Cleanup and fix bugs
-* Disable all contrib and optional modules
-* If modules have bad upgrade path, may need to uninstall
-* Switch to core theme (garland)
+* Avoid EOL
+* Can perform the update in-place
+* Your custom modules might need only small fixes
 
 --end--
 
-## Major upgrade basics
+## Major upgrades, the old way
 
-Perform the upgrade:
+In D6:
 
-* Update code of core and remaining modules to highest D7 version
+* Update core and contrib to latest D6 version
+* Minimize the site: disable custom theme, modules, some contrib
+
+Do the upgrade:
+
+* Update core and contrib code to highest D7 version
 * Run `drush updb`
-* Use content_migrate for CCK->fields upgrade path
-* Reenable and test contrib modules
-  * Iterate on upgrading code and testing
-  * Often need to find alternatives (popups -> references_dialog)
-* Reenable and test custom modules
-  * Start with coder upgrade
-* Restore project-specific theme
-* Adjust site as necessary to rebuild missing functionality
-  * Lots of misc testing, development, database tweaks
+* Use content_migrate to move from CCK to fields
+* Upgrade and re-enable modules
+* Fix all the breakage! Lots of ways things can go wrong
+
+--end--
+
+## Major upgrades, D8
+
+No more in-place upgrades!
+
+* Build your brand new D8 site
+  * Can't keep your custom modules or theme
+* Migrate content from your existing D6 or D7 site
+
+--end--
+
+## Major upgrades, D8
+
+For a simple site, it's easy:
+
+* Create an empty D8 site
+* Install migrate_upgrade from contrib
+* Visit `/upgrade', tell it how to connect to your D6/D7 database
+* Go!
+
+All your settings and content will be pulled into D8! But still...
+
+* A lot of things aren't working quite yet, eg: multilingual content
+* Have to rebuild custom modules and themes
+* Contrib modules you used to use may not be ready, eg: panels
+
+--end--
+
+## Major upgrades, D8
+
+For a more complex site, you might just want to do a full site rebuild.
+
+* Build a nice new site from scratch, you'll like D8!
+* But still get some of the content from D6/D7
+  * Run `drush migrate-upgrade --configure` to configure upgrade migrations without running them
+  * Then edit/remove migrate config files as desired, so only the things you want are migrated
+  * Use `drush migrate-import` from migrate_tools to execute the migrations
 
 --end--
 
@@ -211,7 +240,6 @@ Perform the upgrade:
 * Unit testing
 * Integration testing
 * UI testing
-  * behat
 * Continuous integration
 
 --end--
@@ -358,143 +386,6 @@ test:
 
 --end--
 
-## D7 upgrade case study
-
-* Project description
-* Challenges
-* Solutions
-* Tools
-  * Docker for build automation
-  * PHPUnit and SiteDiff for testing
-
---end--
-
-## D7 upgrade case study
-
-<img src="img/coursecal-home.png" width="45%" style="float: right; margin-left: 40px; margin-right: 20px" />
-
-* McGill University's Course Calendar
-* "Academic Catalog": Programs, Courses, and University Regulations
-* Legal documents, course schedules, metadata, cross-referencing
-* Search-driven UI
-* Buckets of imported records
-
---end--
-
-## Search-driven UI
-
-<img src="img/coursecal-search.png" width="45%" style="float: right; margin-left: 40px; margin-right: 20px" />
-
-* Custom search tabs containing nested facets
-* Section specific search pages in menus
-* apachesolr-6.x-2.x -> Search API
-
---end--
-
-## Logically nested menus
-
-<img src="img/coursecal-faculty.png" width="40%" style="float: right; margin-left: 40px; margin-right: 20px" />
-
-* For users, consistent global menu tree with ~10k items
-  * consistency between menus, breadcrumbs, URLs
-* ~100s menu items in primary\_links, rest in various book menus
-* Merged via custom code, using core menu\_tree\_page_data, menu\_block
-
---end--
-
-## Complex data structure
-
-* 70k node revisions per year; mostly imported from banner+documentum
-* 15 content types, 170 field instances; cross-linked via node reference fields
-* Custom input filters (auto-detection of course names in any HTML content)
-
---end--
-
-## Hard to upgrade
-
-* Lots of custom modules
-  * Legacy, with 4 years of cruft, lots of coupling
-  * Needed extensive refactoring before upgrading
-* Legal requirement that data shown must be correct and complete
-* Deliverable = upgrade script, not code + db dump
-  * Must be able to re-run on prod database
-  * Must also be adaptable for 4 previous years (separate DBs)
-
---end--
-
-## Easier parts
-
-* Around 20-30 contrib modules
-* No auth users except admins
-* Little dynamic content except via import scripts
-* Evolving Web wrote the original code
-* Disciplined client, no scope creep
-
---end--
-
-## Harder parts
-
-* Features have no upgrade path
-* Client unable to provide complete dev environment
-  * We had to deduce which contrib modules enabled, version
-  * Missing some custom modules defining content types, modules, blocks
-* Performance: 2 days to run content migrate
-* Misc upgrade path bugs (entityreference, nodeblock, i18n)
-
---end--
-
-## Technical solutions
-
-* Test-driven refactoring
-* Content migrate tweaks for speed
-* Docker for build process automation
-* SiteDiff for correctness
-
---end--
-
-## Refactor + unit testing
-
-* PHPUnit tests for custom modules
-  * Feasible to make it work with D7 (autoloading vs manual includes)
-* Use fixtures in your test (eg. for menu trees and nodes)
-* Can't mock/swap drupal functions, need process isolation
-* Refactor custom code to allow dependency injection of mocks
-
---end--
-
-
-## Build process
-
-* D6 deploy script
-* D6 refactor adjustments
-* D6 prepare (defeaturize, turn off non-core modules, change theme to bartik, pm-uninstall several modules)
-* drush updb
-* Enable modules, run contrib updb
-* content migrate
-* [menu\_adjustments.php](https://github.com/evolvingweb/coursecal-d7/blob/d7/build/upgrade/menu_adjustments.php)
-* [d7\_adjustments.sh](https://github.com/evolvingweb/coursecal-d7/blob/d7/build/scripts/d7_adjustments.sh)
-* [d7\_adjustments\_solr.sh](https://github.com/evolvingweb/coursecal-d7/blob/d7/build/scripts/d7_adjustments_solr.sh)
-
---end--
-
-## Performance tweaks
-
-* content\_migrate (submodule of CCK) is slow (~2 days)
-  * One field record (delta) at a time, one node at a time, one value at a time
-  * Prune the database (10% of the nodes, focused on 1 faculty, try to keep consistency)
-  * [github.com/dergachev/content\_migrate\_tweaks](/https://github.com/dergachev/content_migrate_tweaks/)
-  * Replaced with INSERT ... SELECT ... queries as >100x optimization
-  * Validated with unit tests, table checksums, SiteDiff
-* `drush php-script` vs `hook_update_N`
-
---end--
-
-## Build automation reqs
-
-* Easily deployed, consistent dev and test environments
-* Checkpoints
-* Caching
-* Simplicity (bash)
 
 --end--
 
