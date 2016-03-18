@@ -421,7 +421,7 @@ test:
 
 [github.com/evolvingweb/drupal-docker-marriage](https://github.com/evolvingweb/drupal-docker-marriage)
 
-[Demo notes](https://github.com/dergachev/presentations/blob/gh-pages/drupalcon-la-upgrades/demo-marriage.md)
+[Demo notes](https://github.com/vasi/ew-presentations/blob/gh-pages/midcamp-2016-upgrades/demo-marriage.md)
 
 --end--
 
@@ -517,7 +517,7 @@ SiteDiff turns out to be useful on many projects
 
 [github.com/vasi/sitediff-update-demo](https://github.com/vasi/sitediff-update-demo)
 
-[Demo notes](https://github.com/dergachev/presentations/blob/gh-pages/drupalcon-la-upgrades/demo-sitediff.md)
+[Demo notes](https://github.com/vasi/ew-presentations/blob/gh-pages/midcamp-2016-upgrades/demo-sitediff.md)
 
 --end--
 
