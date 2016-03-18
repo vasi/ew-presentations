@@ -286,9 +286,9 @@ This is informative, but a lot of theory. How do we actually make it work in pra
 
 --end--
 
-## Case Study 1 - AllJoyn Certification Tool
+## Case Study - Certification Tool
 
-An Internet of Things consortium needed to certify products that met its standards.
+An Internet of Things consortium needed to [certify products that met its standards](http://certify.alljoyn.org).
 
 Challenges:
 
@@ -356,11 +356,18 @@ Solution: Put everyone in the same environment
 ## Docker
 
 * Dockerfile build process
-  * Starts with clean Ubuntu image
-  * Looks almost like a shell script
-  * Installs all necessary packages: tomcat, solr, nginx, xhprof, xdebug, ...
+  * Starts with clean distro image
+  * Installs all necessary packages: mysql, tomcat, solr, nginx, xhprof, xdebug, ...
   * Runs our deploy scripts
 * Caching
+
+<pre>
+FROM ubuntu:14.04
+RUN apt-get update && apt-get install -y mysql apache2 ...
+RUN a2enmod ssl
+COPY code /var/www/html
+...
+</pre>
 
 --end--
 
@@ -418,11 +425,38 @@ test:
 
 --end--
 
+## Case Study- McGill calendar
+
+McGill used a D6 site for their course calendar, wanted to go to D7.
+
+Challenges:
+* Many custom modules
+* Lots of content, complex structure
+* Legal requirement that it be correct and complete!
+* Logically nested menus: menu + book
+
+--end--
+
+## PHPUnit
+
+Problem: Merging menus is tricky
+<br />
+Solution: Tests with fixtures
+
+* Single entry point to contain complexity
+* List of potential inputs and desired outputs
+
+--end--
+
 ## SiteDiff
+
+Problem: Code must change, content must stay the same
+<br />
+Solution: Compare the content
 
 [github.com/evolvingweb/sitediff](https://github.com/evolvingweb/sitediff)
 
-* Downloads subset of pages from _before_ and _after_
+* Downloads list of pages from two sites
 * Computes diff of HTML
 * Cleans up spurious changes, like absolute domains
 * Reports changes via command-line UI and web report
@@ -493,3 +527,5 @@ SiteDiff turns out to be useful on many projects
 * SiteDiff: [github.com/evolvingweb/sitediff](https://github.com/evolvingweb/sitediff)
 * Demo of SiteDiff: [github.com/vasi/sitediff-update-demo](https://github.com/vasi/sitediff-update-demo)
 * Demo of docker, behat, CircleCI: [github.com/evolvingweb/drupal-docker-marriage](https://github.com/evolvingweb/drupal-docker-marriage)
+
+--end--
