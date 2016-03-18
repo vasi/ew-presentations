@@ -13,7 +13,8 @@
 }
 
 .deck-container .slide h2 {
-  border-bottom-color: #d0dfe8; 
+  border-bottom-color: #d0dfe8;
+  font-size: 1.75em;
 }
 .deck-container .slide pre {
   border-color: #ccc;
