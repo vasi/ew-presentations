@@ -27,8 +27,8 @@
   * Testing
 * __Tools__
   * behat
-  * CircleCI
   * docker
+  * CircleCI
       * __drupal-docker-marriage demo__
   * PHPUnit
   * sitediff
@@ -51,7 +51,7 @@
   * Integration with legacy systems
   * Expert Drupal training
 * Based in Montreal, clients in Canada and USA
-* EW is hiring! So let us know if you're interested
+* EW is hiring! Let us know if you're interested
 
 --end--
 
@@ -111,9 +111,9 @@
 
 * Minor updates: 7.35 -> 7.36
   * Modules need updates too!
-  * Perform these as often as possible, to keep up with security
+  * Perform these as often as possible, to keep up with security fixes
 * Major upgrades: 6.28 -> 8.0.5
-  * Brings many, many new features and opportunities
+  * Bring many, many new features and opportunities
   * Necessary before D6 is obsolute
 
 --end--
@@ -163,22 +163,22 @@ The first rule of major upgrades is there is no such thing as a basic major upgr
 ## Major upgrade basics
 
 * Major upgrades can be as hard as a site rebuild
-  * Change in ways that aren't backwards-compatible, especially D7 -> D8
+  * Drupal changes in ways that aren't backwards-compatible
   * Modules may not be updated yet, or at all
 
 --end--
 
-## Major upgrades, the old way
+## Major upgrades, grandpa style
 
-You might still want to do D6 to D7 upgrades:
+You might still want to do D6 to D7 upgrades sometimes:
 
-* Avoid EOL
+* Avoid D6 EOL
 * Can perform the update in-place
 * Your custom modules might need only small fixes
 
 --end--
 
-## Major upgrades, the old way
+## Major upgrades, grandpa style
 
 In D6:
 
@@ -209,28 +209,27 @@ No more in-place upgrades!
 
 For a simple site, it's easy:
 
-* Create an empty D8 site
-* Install migrate_upgrade from contrib
-* Visit `/upgrade', tell it how to connect to your D6/D7 database
-* Go!
+1. Create an empty D8 site, install migrate_upgrade
+1. Visit `/upgrade', give D6/D7 DB credentials
+1. Go!
 
 All your settings and content will be pulled into D8! But still...
 
-* A lot of things aren't working quite yet, eg: multilingual content
-* Have to rebuild custom modules and themes
-* Contrib modules you used to use may not be ready, eg: panels
+* Lots of things aren't working yet, eg: multilingual content
+* Needs to rebuild custom modules and themes
+* Contrib modules may not be ready, eg: panels
 
 --end--
 
 ## Major upgrades, D8
 
-For a more complex site, you might just want to do a full site rebuild.
+For a more complex site, you might just want to do a site rebuild.
 
-* Build a nice new site from scratch, you'll like D8!
-* But still get some of the content from D6/D7
+* Build a nice new site from scratch
+* But still get some or all content from D6/D7
   * Run `drush migrate-upgrade --configure` to configure upgrade migrations without running them
-  * Then edit/remove migrate config files as desired, so only the things you want are migrated
-  * Use `drush migrate-import` from migrate_tools to execute the migrations
+  * Then edit/remove migrate config files as desired
+  * Use `drush migrate-import` from migrate_tools
 
 --end--
 
@@ -278,16 +277,43 @@ For a more complex site, you might just want to do a full site rebuild.
 
 --end--
 
+## Tools
+
+This is informative, but a lot of theory. How do we actually make it work in practice?
+
+* What problems have we encountered on our projects?
+* What tools have we used to solve them?
+
+--end--
+
+## Case Study 1 - AllJoyn Certification Tool
+
+An Internet of Things consortium needed to certify products that met its standards.
+
+Challenges:
+
+* Complex data, with constraints
+* Relationships between products
+* Complex permissions: editing and workflow
+* Slowly grew into giant, fragile forms of doom
+* Several developers
+
+--end--
+
 ## Behat
 
-[behat](http://docs.behat.org) and its [Drupal extension](https://behat-drupal-extension.readthedocs.org)
+Problem: Every code change could break the form
+<br />
+Solution: Test the form's behavior
+
+We used [behat](http://docs.behat.org) and its [Drupal extension](https://behat-drupal-extension.readthedocs.org)
 
 * Why BDD?
-  * Testing will be ready for upgrades!
 * Why use behat?
   * UI testing
   * Drupal integration
   * Easily understood tests
+* Found tons of bugs
 
 --end--
 
@@ -313,15 +339,40 @@ Here's how we implemented the "hover" rule above, in a custom behat context:
 
 --end--
 
-## CI
+## Docker
 
-* Tests can be slow
-* It's easy to forget to run them
-* **Continuous integration**
-  * Run your tests automatically for every commit
-  * Usually uses a build server
-  * Reports on the results
-  * For upgrades, best with Test-Driven Development
+Problem: Bugs aren't reproducible
+<br />
+Solution: Put everyone in the same environment
+
+* Easily build and run virtualized containers
+* Easy to spin up an exact copy of your site
+  * If something breaks, just spin it up again
+  * Very useful for minor updates!
+* Consistent environment in dev/staging/prod
+
+--end--
+
+## Docker
+
+* Dockerfile build process
+  * Starts with clean Ubuntu image
+  * Looks almost like a shell script
+  * Installs all necessary packages: tomcat, solr, nginx, xhprof, xdebug, ...
+  * Runs our deploy scripts
+* Caching
+
+--end--
+
+## Continuous integration
+
+Problem: Tests are slow, devs avoid running them
+<br />
+Solution: Run tests in the background
+
+* Run your tests automatically for every commit
+* Usually uses a build server
+* Reports on the results
 
 --end--
 
@@ -331,22 +382,12 @@ We use [CircleCI](http://circleci.com) for our continuous integration:
 
 * Integrates with GitHub branches and pull requests
 * Email notifications when something breaks
-* Catches very unexpected bugs, eg: servers disappearing, unmaintained packages
+* Catches event unexpected bugs, eg: servers disappearing, unmaintained packages
 * Allows use of docker, so test environment is consistent with dev/prod
 
 --end--
 
-## Docker
-
-* Easily build and run virtualized containers
-* Easy to spin up an exact copy of your site
-  * If something breaks, just spin it up again
-  * This is very useful for minor updates!
-* Consistent environment in dev/staging/prod
-
---end--
-
-## CircleCI & Docker
+## CircleCI
 
 CircleCI is configured with a circle.yml file:
 
@@ -374,31 +415,6 @@ test:
 [github.com/evolvingweb/drupal-docker-marriage](https://github.com/evolvingweb/drupal-docker-marriage)
 
 [Demo notes](https://github.com/dergachev/presentations/blob/gh-pages/drupalcon-la-upgrades/demo-marriage.md)
-
---end--
-
-
---end--
-
-## Docker
-
-* Dockerfile build process:
-* Starts with clean Ubuntu image
-* Bash-like
-  * Installs all necessary packages: tomcat, solr, nginx, xhprof, xdebug, ...
-  * Runs our deploy scripts
-* Caching
-* Caveats (Makefiles, Linux, TIMTOWTDI)
-
---end--
-
-## Testing requirements
-
-* Ensure dev mirrors prod
-* Ensure D6 refactoring changed nothing
-* D7 should mostly mirror D6
-* Mostly static HTML content
-* Too big to test manually
 
 --end--
 
